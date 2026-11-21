@@ -1,0 +1,57 @@
+/* =========================================================================
+   tokens.css — the design system in one place.
+   -------------------------------------------------------------------------
+   LESSON: CSS custom properties ("variables")
+   Declare once on :root, use anywhere with var(--name).
+   Want a different pink? Change ONE line here and the whole site updates.
+   The old site repeated #5A3E36 in dozens of places.
+   ========================================================================= */
+
+:root {
+  /* ---- Colour ----------------------------------------------------------
+     Kept your palette (cream / pink / chocolate) and added "berry",
+     sampled from the magenta in Mom's logo, so the site and logo match. */
+  --cream: #FFF8F0;       /* page background */
+  --blush: #FADADD;       /* soft pink bands */
+  --chocolate: #5A3E36;   /* body text */
+  --cocoa: #3B2722;       /* headings, footer */
+  --berry: #A32B70;       /* buttons, links, highlights (logo magenta, darkened for readability) */
+  --berry-dark: #84205A;  /* button hover */
+  --muted: #7A6058;       /* secondary text */
+  --line: #EBD9CF;        /* borders, dividers */
+
+  /* ---- Type ------------------------------------------------------------
+     Young Serif: chunky, friendly, like a painted bakery sign. Headings only.
+     Figtree: clean and readable for everything else. */
+  --font-display: 'Young Serif', Georgia, serif;
+  --font-body: 'Figtree', system-ui, sans-serif;
+
+  /* Type scale. clamp(min, preferred, max) makes sizes grow with
+     the screen width but never go too small or too big. */
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  --text-hero: clamp(2.6rem, 1.4rem + 5vw, 5.25rem);
+
+  /* ---- Spacing (a consistent rhythm instead of random px values) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* ---- Shape ---- */
+  --radius: 14px;
+  --radius-pill: 999px;
+  /* The site's signature shape: an arch, like a cake dome or a bakery window. */
+  --arch: 999px 999px var(--radius) var(--radius);
+
+  --container: 72rem;
+  --header-height: 4.5rem;
+}

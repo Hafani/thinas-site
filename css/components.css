@@ -1,0 +1,626 @@
+/* =========================================================================
+   components.css — pieces used on every page: buttons, header, nav, footer.
+   -------------------------------------------------------------------------
+   LESSON: BEM naming  →  block__element--modifier
+     .nav            the block
+     .nav__link      a part inside it
+     .nav--open      a variation / state of it
+   It keeps class names predictable and avoids styles fighting each other.
+   ========================================================================= */
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.85rem 1.6rem;
+  border: 2px solid var(--berry);
+  border-radius: var(--radius-pill);
+  background: var(--berry);
+  color: var(--cream);
+  font: 600 var(--text-base) / 1 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+  background: var(--berry-dark);
+  border-color: var(--berry-dark);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Outline version for secondary actions */
+.btn--ghost {
+  background: transparent;
+  color: var(--berry);
+}
+
+.btn--ghost:hover {
+  background: var(--berry);
+  color: var(--cream);
+}
+
+.btn--small {
+  padding: 0.6rem 1.1rem;
+  font-size: var(--text-sm);
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: sticky; /* stays at the top while you scroll */
+  top: 0;
+  z-index: 50;
+  /* GOTCHA: don't add backdrop-filter, filter or transform here.
+     Any of them turns the header into the "containing block" for
+     position: fixed children, so the mobile .nav would be trapped inside
+     the 72px-tall header instead of covering the screen. */
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__inner {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Brand on the left; margin-right: auto pushes everything else right.
+   Order after it: nav (desktop only), basket button, hamburger (mobile only). */
+.site-header__inner > .brand {
+  margin-right: auto;
+}
+
+@media (min-width: 860px) {
+  .site-header__inner {
+    gap: var(--space-6);
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: var(--cocoa);
+}
+
+.brand__emblem {
+  width: 44px;
+  height: auto;
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+/* ---------- Navigation ----------
+   MOBILE FIRST: these are the small-screen styles.
+   The @media block further down changes them for wider screens. */
+
+.nav {
+  position: fixed;
+  inset: var(--header-height) 0 0 0; /* fills the screen below the header */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-8) 1.25rem;
+  background: var(--cream);
+  /* Hidden off to the right until opened */
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.3s ease, visibility 0.3s;
+}
+
+.nav--open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.nav__link {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--cocoa);
+  text-decoration: none;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.nav__link[aria-current='page'] {
+  color: var(--berry);
+}
+
+.nav__cta {
+  margin-top: var(--space-6);
+  align-self: flex-start;
+}
+
+/* Hamburger: three lines drawn with one span + its ::before/::after */
+.nav-toggle {
+  display: grid;
+  place-items: center;
+  width: 44px; /* 44px = minimum comfortable tap target */
+  height: 44px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.nav-toggle__bars,
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--cocoa);
+  border-radius: 2px;
+  transition: transform 0.25s, background-color 0.25s;
+}
+
+.nav-toggle__bars {
+  position: relative;
+}
+
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle__bars::before { top: -7px; }
+.nav-toggle__bars::after  { top: 7px; }
+
+/* When open, the lines turn into an X */
+.nav-toggle[aria-expanded='true'] .nav-toggle__bars {
+  background: transparent;
+}
+.nav-toggle[aria-expanded='true'] .nav-toggle__bars::before {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded='true'] .nav-toggle__bars::after {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---- Wide screens: normal horizontal menu ---- */
+@media (min-width: 860px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-6);
+    padding: 0;
+    background: none;
+    transform: none;
+    visibility: visible;
+    transition: none;
+  }
+
+  .nav__link {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--chocolate);
+    padding: var(--space-2) 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav__link:hover,
+  .nav__link[aria-current='page'] {
+    color: var(--berry);
+    border-bottom-color: currentColor;
+  }
+
+  .nav__cta {
+    margin-top: 0;
+    align-self: auto;
+  }
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  margin-top: var(--space-12);
+  background: var(--blush);
+  color: var(--cocoa);
+  padding-top: var(--space-16);
+}
+
+.site-footer__inner {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 700px) {
+  .site-footer__inner {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.site-footer__name {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  margin: var(--space-3) 0 var(--space-1);
+}
+
+.site-footer__heading {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+
+.site-footer p {
+  margin-bottom: var(--space-2);
+}
+
+.site-footer a {
+  color: var(--cocoa);
+}
+
+.site-footer__legal {
+  margin-top: var(--space-12);
+  padding: var(--space-6) 0;
+  border-top: 1px solid color-mix(in srgb, var(--cocoa) 15%, transparent);
+  font-size: var(--text-sm);
+  max-width: none;
+}
+
+/* ---------- Simple page intro (used on the inner pages) ---------- */
+
+.page-intro {
+  padding-block: var(--space-16) var(--space-8);
+}
+
+.page-intro h1 {
+  font-size: var(--text-2xl);
+}
+
+.page-intro p {
+  font-size: var(--text-lg);
+  color: var(--muted);
+}
+
+/* =========================================================================
+   Phase 2 — basket button, drawer, quantity stepper
+   ========================================================================= */
+
+/* ---------- Header basket button ---------- */
+
+.basket-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--cocoa);
+  cursor: pointer;
+}
+
+.basket-btn:hover {
+  background: var(--blush);
+}
+
+.basket-btn__count {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.3rem;
+  border-radius: var(--radius-pill);
+  background: var(--berry);
+  color: var(--cream);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+/* [hidden] normally means display:none, but our display rules above
+   would win without this. */
+.basket-btn__count[hidden] {
+  display: none;
+}
+
+@keyframes pop {
+  50% { transform: scale(1.45); }
+}
+
+.basket-btn__count.pop {
+  animation: pop 0.35s ease;
+}
+
+/* ---------- Basket drawer (<dialog>) ---------- */
+
+.drawer {
+  /* Dialogs are centred by default; we pin this one to the right edge. */
+  margin: 0 0 0 auto;
+  width: min(28rem, 100%);
+  height: 100dvh;
+  max-height: none;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: var(--cream);
+  color: var(--chocolate);
+}
+
+.drawer[open] {
+  animation: slide-in 0.3s cubic-bezier(.2,.7,.2,1);
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+}
+
+.drawer::backdrop {
+  background: rgb(59 39 34 / 0.45); /* cocoa, see-through */
+}
+
+.drawer__inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--line);
+}
+
+.drawer__title {
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.drawer__body {
+  flex: 1;          /* takes the leftover height… */
+  overflow-y: auto; /* …and scrolls if the basket is long */
+  padding: var(--space-2) var(--space-6);
+}
+
+.drawer__empty {
+  padding-block: var(--space-12);
+}
+
+.drawer__foot {
+  padding: var(--space-6);
+  border-top: 1px solid var(--line);
+  background: color-mix(in srgb, var(--blush) 45%, var(--cream));
+}
+
+.drawer__foot:empty {
+  display: none;
+}
+
+.drawer__note {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.drawer__cta {
+  width: 100%;
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--cocoa);
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--blush);
+}
+
+/* ---------- Basket lines ----------
+   Grid areas let us name the parts and place them:
+     name     price
+     stepper  remove                                        */
+
+.lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'info    price'
+    'stepper remove';
+  gap: var(--space-3) var(--space-4);
+  align-items: center;
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.line p {
+  margin: 0;
+}
+
+.line__info    { grid-area: info; }
+.line__price   { grid-area: price; font-weight: 600; color: var(--cocoa); }
+.stepper       { grid-area: stepper; }
+.line__remove  { grid-area: remove; }
+
+.line__name {
+  font-weight: 600;
+  color: var(--cocoa);
+}
+
+.line__details {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.line__remove {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.line__remove:hover {
+  color: var(--berry);
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: #fff;
+}
+
+.stepper button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--cocoa);
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.stepper button:hover {
+  color: var(--berry);
+}
+
+.stepper span {
+  min-width: 1.75rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ---------- Totals ---------- */
+
+.totals {
+  margin: 0 0 var(--space-3);
+}
+
+.totals div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-1);
+}
+
+.totals dt,
+.totals dd {
+  margin: 0;
+}
+
+.totals dd {
+  font-weight: 700;
+  color: var(--cocoa);
+}
+
+.totals div:first-child dd {
+  font-size: var(--text-lg);
+}
+
+.totals__deposit {
+  color: var(--berry);
+}
+
+.totals__deposit dd {
+  color: var(--berry);
+}
+
+/* Stepper sits at its natural width, not stretched across the grid cell */
+.line .stepper {
+  justify-self: start;
+}
+
+/* Keep the brand name on one line on small phones */
+.brand__name {
+  white-space: nowrap;
+}
+
+@media (max-width: 400px) {
+  .brand__name {
+    font-size: 1.05rem;
+  }
+  .brand__emblem {
+    width: 38px;
+  }
+}
+
+/* ---------- Form fields (menu flavour picker + all Phase 3 forms) ---------- */
+
+.field {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.field__label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--cocoa);
+}
+
+.field__control {
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--chocolate);
+  font: inherit;
+}
+
+.field__control:focus-visible {
+  border-color: var(--berry);
+  outline-offset: 1px;
+}
+
+
+/* ---------- Dropdowns (<select>) ----------
+   Safari draws selects with a grey, shiny gradient that ignores our
+   background. appearance: none removes the browser's own drawing, so we
+   add the arrow back ourselves as a small SVG background image. */
+select.field__control {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.5rem; /* room for the arrow */
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%233B2722' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  cursor: pointer;
+}
+
+/* A lone dropdown doesn't need the full width of the form */
+.form > .field > select.field__control {
+  max-width: 24rem;
+}

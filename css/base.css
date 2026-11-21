@@ -1,0 +1,114 @@
+/* =========================================================================
+   base.css — resets and default element styles.
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* width includes padding + border: far less maths */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--chocolate);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Footer sits at the bottom even on short pages:
+   body is a column; <main> grows to fill the leftover space. */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400; /* Young Serif only has one weight */
+  color: var(--cocoa);
+  line-height: 1.1;
+  margin: 0 0 var(--space-4);
+  text-wrap: balance; /* avoids one lonely word on the last line */
+}
+
+p {
+  margin: 0 0 var(--space-4);
+  max-width: 65ch; /* "ch" = width of a "0". Keeps lines comfortable to read */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--berry);
+  text-underline-offset: 0.2em;
+}
+
+/* Keyboard users need to SEE where they are. Never remove outlines
+   without replacing them. :focus-visible shows it for keyboard only. */
+:focus-visible {
+  outline: 3px solid var(--berry);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---- Utilities ---- */
+
+.container {
+  width: min(100% - 2.5rem, var(--container));
+  margin-inline: auto;
+}
+
+/* Hidden on screen but still read out by screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Respect people who've asked their device for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* GOTCHA (found in Phase 2): position: sticky only sticks within its PARENT.
+   The header's parent was this placeholder div, which is exactly as tall as
+   the header — so it had nowhere to stick and scrolled away.
+   display: contents makes the div "disappear" from layout, so the header
+   behaves as a direct child of <body> and sticks for the whole page. */
+#site-header {
+  display: contents;
+}
+
+/* The hidden attribute should ALWAYS hide, even on elements we've given
+   display: grid / flex elsewhere (a class rule would otherwise win). */
+[hidden] {
+  display: none !important;
+}

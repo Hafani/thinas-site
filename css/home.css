@@ -1,0 +1,302 @@
+/* =========================================================================
+   home.css — styles only the homepage uses.
+   ========================================================================= */
+
+/* ---------- Hero ----------
+   LESSON: CSS Grid. On phones it's one column (text, then photo).
+   From 860px wide, two columns side by side. */
+
+.hero {
+  display: grid;
+  gap: var(--space-12);
+  align-items: center;
+  padding-block: var(--space-12) var(--space-16);
+}
+
+@media (min-width: 860px) {
+  .hero {
+    grid-template-columns: 1.15fr 0.85fr;
+    padding-block: var(--space-16) var(--space-24);
+  }
+}
+
+.hero__title {
+  font-size: var(--text-hero);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-6);
+}
+
+/* Each line is its own block so it can animate in one after the other */
+.hero__line {
+  display: block;
+}
+
+.hero__lead {
+  font-size: var(--text-lg);
+  max-width: 34rem;
+  margin-bottom: var(--space-8);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* The arch-shaped photo — the site's signature shape */
+.hero__media {
+  position: relative;
+  margin: 0;
+  max-width: 26rem;
+  justify-self: center;
+  width: 100%;
+}
+
+.hero__media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover; /* crop to fill the shape without squashing */
+  border-radius: var(--arch);
+}
+
+/* Round stamp overlapping the arch's edge */
+.hero__badge {
+  position: absolute;
+  left: -1.25rem;
+  bottom: 2.5rem;
+  display: grid;
+  place-items: center;
+  width: 7.5rem;
+  aspect-ratio: 1;
+  padding: var(--space-4);
+  border-radius: 50%;
+  background: var(--berry);
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.15;
+  text-align: center;
+  transform: rotate(-8deg);
+}
+
+/* ---------- The one orchestrated motion moment: hero on page load ----------
+   LESSON: @keyframes + animation-delay to stagger.
+   `both` keeps the element at the start state until its delay is over. */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(0.6em); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes arch-reveal {
+  from { clip-path: inset(100% 0 0 0 round 999px 999px 14px 14px); }
+  to   { clip-path: inset(0 0 0 0 round 999px 999px 14px 14px); }
+}
+
+@keyframes stamp {
+  from { opacity: 0; transform: rotate(-30deg) scale(0.6); }
+  to   { opacity: 1; transform: rotate(-8deg) scale(1); }
+}
+
+.hero__line { animation: rise 0.7s cubic-bezier(.2,.7,.2,1) both; }
+.hero__line:nth-child(2) { animation-delay: 0.08s; }
+.hero__line:nth-child(3) { animation-delay: 0.16s; }
+.hero__line:nth-child(4) { animation-delay: 0.24s; }
+.hero__lead,
+.hero__actions { animation: rise 0.7s 0.35s cubic-bezier(.2,.7,.2,1) both; }
+.hero__media img { animation: arch-reveal 1s 0.15s cubic-bezier(.6,0,.2,1) both; }
+.hero__badge { animation: stamp 0.5s 1s cubic-bezier(.3,1.6,.5,1) both; }
+
+/* ---------- Generic section spacing ---------- */
+
+.section {
+  padding-block: var(--space-16);
+}
+
+.section h2 {
+  font-size: var(--text-2xl);
+}
+
+.section__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.section__head h2 {
+  margin: 0;
+}
+
+.section__link {
+  font-weight: 600;
+}
+
+/* ---------- Category tiles ---------- */
+
+.categories {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8) var(--space-4);
+}
+
+@media (min-width: 860px) {
+  .categories {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.category__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.category__link img {
+  width: 100%;
+  /* Rounded rectangle, not the arch: products in boxes and buckets are
+     rectangular, so an arch would cut off their top corners.
+     The arch stays on the hero cake only. */
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius);
+  margin-bottom: var(--space-4);
+  transition: transform 0.3s ease;
+}
+
+.category__link:hover img {
+  transform: translateY(-4px);
+}
+
+.category__name {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-1);
+}
+
+.category__link:hover .category__name {
+  color: var(--berry);
+}
+
+.category__price {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+/* ---------- Ordering steps ---------- */
+
+.steps-band {
+  background: var(--blush);
+  padding-block: var(--space-16);
+  margin-block: var(--space-8);
+}
+
+.steps-band h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-8);
+}
+
+.steps {
+  list-style: none;
+  margin: 0 0 var(--space-12);
+  padding: 0;
+  display: grid;
+  gap: var(--space-8);
+  counter-reset: step; /* LESSON: CSS counters number things for you */
+}
+
+@media (min-width: 760px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step {
+  counter-increment: step;
+  border-top: 2px solid var(--cocoa);
+  padding-top: var(--space-4);
+}
+
+.step::before {
+  content: counter(step);
+  display: block;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--berry);
+  margin-bottom: var(--space-3);
+}
+
+.step__title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+}
+
+.step p {
+  margin: 0;
+}
+
+/* ---------- Classes ---------- */
+
+.classes {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (min-width: 860px) {
+  .classes {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+  }
+}
+
+.classes__photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.pricelist {
+  list-style: none;
+  margin: var(--space-6) 0 var(--space-8);
+  padding: 0;
+}
+
+/* Name ........ Price  — the dotted line is a flex item that grows */
+.pricelist li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+}
+
+.pricelist li::after {
+  content: '';
+  order: 1; /* place the dots between the two spans */
+  flex: 1;
+  border-bottom: 2px dotted color-mix(in srgb, var(--chocolate) 35%, transparent);
+  transform: translateY(-0.3em);
+}
+
+.pricelist li span:last-child {
+  order: 2;
+  font-weight: 600;
+  color: var(--cocoa);
+  white-space: nowrap;
+}
+
+.pricelist__note {
+  margin: calc(var(--space-6) * -1) 0 var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}

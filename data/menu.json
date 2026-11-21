@@ -1,0 +1,347 @@
+{
+  "categories": [
+    {
+      "id": "scones",
+      "name": "Scones",
+      "note": "Sold in tubs measured in litres."
+    },
+    {
+      "id": "cupcakes",
+      "name": "Cupcakes",
+      "note": "Plain cupcakes come in tubs. Decorated and character cupcakes are sold by the dozen."
+    },
+    {
+      "id": "biscuits",
+      "name": "Biscuits",
+      "note": "Sold in tubs measured in litres."
+    },
+    {
+      "id": "cakes",
+      "name": "Cakes",
+      "note": "Every cake is made to order and priced by design and size."
+    }
+  ],
+  "products": [
+    {
+      "id": "plain-scones",
+      "name": "Plain scones",
+      "category": "scones",
+      "image": "images/plain_scones.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 350
+        },
+        {
+          "label": "10 L",
+          "price": 650
+        },
+        {
+          "label": "20 L",
+          "price": 900
+        }
+      ]
+    },
+    {
+      "id": "flavoured-scones",
+      "name": "Flavoured scones",
+      "category": "scones",
+      "image": "images/flavored_scones.jpg",
+      "flavours": [
+        "Blueberry",
+        "Raisin",
+        "Poppy seed",
+        "Lemon",
+        "Coconut"
+      ],
+      "options": [
+        {
+          "label": "5 L",
+          "price": 450
+        },
+        {
+          "label": "10 L",
+          "price": 800
+        },
+        {
+          "label": "20 L",
+          "price": 1350
+        },
+        {
+          "label": "25 L",
+          "price": 1550
+        }
+      ]
+    },
+    {
+      "id": "plain-cupcakes",
+      "name": "Plain cupcakes",
+      "category": "cupcakes",
+      "image": "images/plain_cupcakes.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 450
+        },
+        {
+          "label": "10 L",
+          "price": 900
+        },
+        {
+          "label": "20 L",
+          "price": 1400
+        }
+      ]
+    },
+    {
+      "id": "decorated-cupcakes",
+      "name": "Decorated or character cupcakes",
+      "category": "cupcakes",
+      "image": "images/decorated_cupcakes.jpg",
+      "description": "Tell Thina your theme or character in the order note.",
+      "options": [
+        {
+          "label": "12",
+          "price": 420
+        },
+        {
+          "label": "24",
+          "price": 840
+        },
+        {
+          "label": "48",
+          "price": 1680
+        }
+      ]
+    },
+    {
+      "id": "melting-moments",
+      "name": "Melting moments",
+      "category": "biscuits",
+      "image": null,
+      "options": [
+        {
+          "label": "5 L",
+          "price": 380
+        },
+        {
+          "label": "10 L",
+          "price": 700
+        },
+        {
+          "label": "20 L",
+          "price": 1350
+        }
+      ]
+    },
+    {
+      "id": "mixed-biscuits",
+      "name": "Mixed biscuits",
+      "category": "biscuits",
+      "image": "images/mixed_biscuits.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 480
+        },
+        {
+          "label": "10 L",
+          "price": 950
+        },
+        {
+          "label": "20 L",
+          "price": 1550
+        }
+      ]
+    },
+    {
+      "id": "eetsumore",
+      "name": "Eet-sum-mor",
+      "category": "biscuits",
+      "image": "images/eetsumore.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 680
+        },
+        {
+          "label": "10 L",
+          "price": 980
+        },
+        {
+          "label": "20 L",
+          "price": 1650
+        }
+      ]
+    },
+    {
+      "id": "romany-creams",
+      "name": "Romany creams",
+      "category": "biscuits",
+      "image": "images/romany_creams.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 650
+        },
+        {
+          "label": "10 L",
+          "price": 1200
+        },
+        {
+          "label": "20 L",
+          "price": 1850
+        }
+      ]
+    },
+    {
+      "id": "jam-tarts",
+      "name": "Jam tarts",
+      "category": "biscuits",
+      "image": "images/jam_tarts.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 450
+        },
+        {
+          "label": "10 L",
+          "price": 950
+        },
+        {
+          "label": "20 L",
+          "price": 1450
+        }
+      ]
+    },
+    {
+      "id": "coconut-biscuits",
+      "name": "Coconut biscuits",
+      "category": "biscuits",
+      "image": "images/coconut_biscuits.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 450
+        },
+        {
+          "label": "10 L",
+          "price": 900
+        },
+        {
+          "label": "20 L",
+          "price": 1550
+        }
+      ]
+    },
+    {
+      "id": "nuttikrust",
+      "name": "Nuttikrust",
+      "category": "biscuits",
+      "image": "images/nuttikrust.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 480
+        },
+        {
+          "label": "10 L",
+          "price": 950
+        },
+        {
+          "label": "20 L",
+          "price": 1650
+        }
+      ]
+    },
+    {
+      "id": "choc-chip-biscuits",
+      "name": "Chocolate chip biscuits",
+      "category": "biscuits",
+      "image": "images/chocolate_chip_cookies.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 520
+        },
+        {
+          "label": "10 L",
+          "price": 950
+        },
+        {
+          "label": "20 L",
+          "price": 1650
+        }
+      ]
+    },
+    {
+      "id": "ginger-biscuits",
+      "name": "Ginger biscuits",
+      "category": "biscuits",
+      "image": "images/ginger_biscuits.jpg",
+      "options": [
+        {
+          "label": "5 L",
+          "price": 520
+        },
+        {
+          "label": "10 L",
+          "price": 950
+        },
+        {
+          "label": "20 L",
+          "price": 1450
+        }
+      ]
+    },
+    {
+      "id": "cakes",
+      "name": "Celebration and bento cakes",
+      "category": "cakes",
+      "image": "images/cake1.jpg",
+      "description": "Flavours: chocolate, red velvet, vanilla, carrot, chocolate mint, blueberry and poppy seed. Other flavours on request.",
+      "quote": true
+    }
+  ],
+  "cakeFlavours": [
+    "Chocolate",
+    "Red velvet",
+    "Vanilla",
+    "Carrot",
+    "Chocolate mint",
+    "Blueberry",
+    "Poppy seed"
+  ],
+  "classes": [
+    {
+      "id": "scones",
+      "name": "Fluffy scones",
+      "price": 1300
+    },
+    {
+      "id": "jam-tarts",
+      "name": "Jam tarts",
+      "price": 1500
+    },
+    {
+      "id": "cupcakes",
+      "name": "Cupcakes and decorating",
+      "price": 1600
+    },
+    {
+      "id": "buttercream",
+      "name": "Buttercream cakes and decorating",
+      "price": 2600
+    },
+    {
+      "id": "biscuits",
+      "name": "Mixed biscuits (three kinds)",
+      "price": 3200
+    },
+    {
+      "id": "fondant",
+      "name": "Fondant cakes",
+      "price": 3200
+    }
+  ]
+}

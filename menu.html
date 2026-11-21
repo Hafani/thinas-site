@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu and prices | Thina's Tasty Treats</title>
+  <meta name="description" content="Scones, cupcakes and biscuits by the tub (5, 10 and 20 litres), plus celebration cakes made to order. Prices and online order requests.">
+  <link rel="icon" href="images/emblem.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/menu.css">
+
+  <script type="module" src="js/main.js"></script>
+  <!-- Only this page needs the menu builder -->
+  <script type="module" src="js/menu-page.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <section class="page-intro">
+      <h1>Menu and prices</h1>
+      <p>Choose a size, add what you'd like to your basket, then send it to Thina as an order request. She'll confirm everything with you on WhatsApp.</p>
+    </section>
+
+    <!-- menu-page.js builds everything inside here from data/menu.json -->
+    <div id="menu-root"></div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

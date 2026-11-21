@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a custom cake | Thina's Tasty Treats</title>
+  <meta name="description" content="Birthday, wedding and celebration cakes made to your design in Pretoria. Tell Thina the occasion, size, flavour and theme, and she'll send you a quote on WhatsApp.">
+  <link rel="icon" href="images/emblem.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/custom-cake-page.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <section class="page-intro page-intro--with-photos">
+      <div>
+        <h1>Request a custom cake</h1>
+        <p>Every cake is made to order, so the price depends on the size and design. Tell Thina what you have in mind and she'll reply with a quote.</p>
+      </div>
+      <div class="intro-photos" aria-hidden="true">
+        <img src="images/cake1.jpg" alt="" width="1024" height="1280">
+        <img src="images/decor_cake.jpg" alt="" width="1024" height="1280">
+      </div>
+    </section>
+
+    <div class="checkout">
+      <div class="checkout__main">
+        <form id="cake-form" class="form" autocomplete="on">
+
+          <h2 class="form__section">The occasion</h2>
+
+          <div class="field" data-field>
+            <label class="field__label" for="name">Your name</label>
+            <input class="field__control" id="name" name="name" type="text" required autocomplete="name" data-label="Your name">
+          </div>
+
+          <div class="field-row">
+            <div class="field" data-field>
+              <label class="field__label" for="occasion">Occasion</label>
+              <select class="field__control" id="occasion" name="occasion" required data-label="The occasion">
+                <option value="">Choose one</option>
+                <option>Birthday</option>
+                <option>Wedding</option>
+                <option>Baby shower</option>
+                <option>Graduation</option>
+                <option>Anniversary</option>
+                <option>Year-end function</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field" data-field>
+              <label class="field__label" for="date">Date needed</label>
+              <input class="field__control field__control--date" id="date" name="date" type="date" required data-date-field data-label="The date">
+            </div>
+          </div>
+          <!-- Only shown (and required) when "Other" is the occasion -->
+          <div class="field" data-field data-show-when="occasion=Other" hidden>
+            <label class="field__label" for="occasionOther">What's the occasion?</label>
+            <input class="field__control" id="occasionOther" name="occasionOther" type="text" required
+                   placeholder="e.g. kitchen tea, farewell, christening" data-label="The occasion">
+          </div>
+
+          <p class="notice" data-short-notice-for="date" hidden>
+            This is short notice for a cake. Thina will let you know if she can fit it in.
+          </p>
+
+          <h2 class="form__section">The cake</h2>
+
+          <fieldset class="field choices choices--5" data-field>
+            <legend class="field__label">Size</legend>
+            <label class="choice"><input type="radio" name="size" value="Bento cake" required data-label="A size">
+              <span class="choice__card"><span class="choice__title">Bento</span><span class="choice__hint">Mini cake for 1–2</span></span></label>
+            <label class="choice"><input type="radio" name="size" value="1 tier" required data-label="A size">
+              <span class="choice__card"><span class="choice__title">1 tier</span></span></label>
+            <label class="choice"><input type="radio" name="size" value="2 tiers" required data-label="A size">
+              <span class="choice__card"><span class="choice__title">2 tiers</span></span></label>
+            <label class="choice"><input type="radio" name="size" value="3 tiers" required data-label="A size">
+              <span class="choice__card"><span class="choice__title">3 tiers</span></span></label>
+            <label class="choice"><input type="radio" name="size" value="Not sure, please advise" required data-label="A size">
+              <span class="choice__card"><span class="choice__title">Not sure</span><span class="choice__hint">Thina will advise</span></span></label>
+            <p class="choices__hint">Tiered cakes take longer to make and decorate, so please ask as early as you can.</p>
+          </fieldset>
+
+          <!-- Flavour dropdowns are built by custom-cake-page.js:
+               one for a bento / 1 tier cake, one per tier for 2 or 3 tiers.
+               The options come from cakeFlavours in data/menu.json. -->
+          <div class="flavour-fields" id="flavour-fields"></div>
+          <div class="field" data-field>
+            <label class="field__label" for="theme">Colours or theme <span class="field__optional">Optional</span></label>
+            <input class="field__control" id="theme" name="theme" type="text" placeholder="e.g. pink and gold, butterflies">
+          </div>
+
+          <div class="field" data-field>
+            <label class="field__label" for="writing">Writing on the cake <span class="field__optional">Optional</span></label>
+            <input class="field__control" id="writing" name="writing" type="text" maxlength="60" placeholder="e.g. Happy 30th Naledi">
+          </div>
+
+          <label class="check">
+            <input type="checkbox" name="pictures" value="yes">
+            <span>I have inspiration pictures. I'll send them in the WhatsApp chat.</span>
+          </label>
+
+          <h2 class="form__section">Getting it to you</h2>
+
+          <fieldset class="field choices" data-field>
+            <legend class="field__label">Collection or delivery?</legend>
+            <label class="choice"><input type="radio" name="method" value="collection" required data-label="Collection or delivery">
+              <span class="choice__card"><span class="choice__title">Collection</span><span class="choice__hint">Thina sends you the address</span></span></label>
+            <label class="choice"><input type="radio" name="method" value="delivery" required data-label="Collection or delivery">
+              <span class="choice__card"><span class="choice__title">Local delivery</span><span class="choice__hint">Fee confirmed by Thina</span></span></label>
+          </fieldset>
+
+          <div class="field" data-field data-show-when="method=delivery" hidden>
+            <label class="field__label" for="address">Delivery address or suburb</label>
+            <input class="field__control" id="address" name="address" type="text" required autocomplete="street-address" data-label="A delivery address or suburb">
+          </div>
+
+          <div class="field" data-field>
+            <label class="field__label" for="budget">Budget <span class="field__optional">Optional</span></label>
+            <input class="field__control" id="budget" name="budget" type="text" placeholder="e.g. around R800">
+          </div>
+
+          <div class="field" data-field>
+            <label class="field__label" for="note">Anything else? <span class="field__optional">Optional</span></label>
+            <textarea class="field__control" id="note" name="note" rows="3" placeholder="Allergies, a filling you'd like, a time that suits you…"></textarea>
+          </div>
+        </form>
+      </div>
+
+      <aside class="checkout__aside" aria-labelledby="preview-title">
+        <h2 id="preview-title" class="panel__title">Your message to Thina</h2>
+        <pre class="message-preview" id="cake-preview"></pre>
+        <button type="submit" form="cake-form" class="btn btn--block">Send cake request on WhatsApp</button>
+        <p class="aside__hint">WhatsApp opens with this message typed out. Check it, then press send. A {DEPOSIT} deposit secures your date once Thina has quoted.</p>
+        <div class="sent" id="cake-sent" hidden>
+          <p><strong>WhatsApp should now be open.</strong> Once you've sent the message, Thina will reply with a quote.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

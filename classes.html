@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baking classes | Thina's Tasty Treats</title>
+  <meta name="description" content="Hands-on baking classes in Pretoria: scones, jam tarts, cupcakes, buttercream and fondant cakes, and biscuits. Book a class with Thina on WhatsApp.">
+  <link rel="icon" href="images/emblem.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/classes-page.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <section class="page-intro page-intro--with-photos">
+      <div>
+        <h1>Baking classes</h1>
+        <p>Hands-on classes at Thina's home, where you bake alongside her and take home what you make. Prices are per person. Choose a class and a date that suits you, and she'll confirm the booking.</p>
+      </div>
+      <div class="intro-photos intro-photos--single" aria-hidden="true">
+        <img src="images/work.jpg" alt="" width="1032" height="774">
+      </div>
+    </section>
+
+    <div class="checkout">
+      <div class="checkout__main">
+        <form id="class-form" class="form" autocomplete="on">
+
+          <!-- The class options are built from "classes" in data/menu.json -->
+          <fieldset class="field choices choices--list" data-field id="class-choices">
+            <legend class="field__label">Which class?</legend>
+            <p class="menu-status">Loading classes…</p>
+          </fieldset>
+
+          <div class="field" data-field>
+            <label class="field__label" for="name">Your name</label>
+            <input class="field__control" id="name" name="name" type="text" required autocomplete="name" data-label="Your name">
+          </div>
+
+          <div class="field-row">
+            <div class="field" data-field>
+              <label class="field__label" for="people">How many people?</label>
+              <input class="field__control" id="people" name="people" type="number" inputmode="numeric"
+                     min="1" max="10" value="1" required data-label="The number of people">
+            </div>
+
+            <div class="field" data-field>
+              <label class="field__label" for="date">Preferred date</label>
+              <input class="field__control field__control--date" id="date" name="date" type="date" required data-date-field data-label="A preferred date">
+            </div>
+          </div>
+          <p class="notice" data-short-notice-for="date" hidden>
+            This is short notice. Thina will let you know if that date works or suggest another.
+          </p>
+
+          <div class="field" data-field>
+            <label class="field__label" for="note">Anything else? <span class="field__optional">Optional</span></label>
+            <textarea class="field__control" id="note" name="note" rows="3" placeholder="Other dates that work for you, your baking experience, questions…"></textarea>
+          </div>
+        </form>
+      </div>
+
+      <aside class="checkout__aside" aria-labelledby="preview-title">
+        <h2 id="preview-title" class="panel__title">Your message to Thina</h2>
+        <pre class="message-preview" id="class-preview"></pre>
+        <button type="submit" form="class-form" class="btn btn--block">Send booking request on WhatsApp</button>
+        <p class="aside__hint">WhatsApp opens with this message typed out. Check it, then press send. Thina will confirm the date with you.</p>
+        <div class="sent" id="class-sent" hidden>
+          <p><strong>WhatsApp should now be open.</strong> Once you've sent the message, Thina will reply to confirm your booking.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

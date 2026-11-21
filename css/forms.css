@@ -1,0 +1,443 @@
+/* =========================================================================
+   forms.css — the three request pages: order details, custom cake, classes.
+   ========================================================================= */
+
+/* ---------- Page intro with photos (cake + classes pages) ---------- */
+
+.page-intro--with-photos {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (min-width: 860px) {
+  .page-intro--with-photos {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.intro-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  max-width: 26rem;
+}
+
+.intro-photos img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+/* Second photo sits lower: a little rhythm, not a rigid grid */
+.intro-photos img:nth-child(2) {
+  margin-top: var(--space-8);
+}
+
+.intro-photos--single {
+  grid-template-columns: 1fr;
+}
+
+.intro-photos--single img {
+  aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 559px) {
+  .intro-photos {
+    display: none; /* on phones, get people to the form faster */
+  }
+}
+
+/* ---------- Two-column layout ----------
+   Phones: one column, in reading order (summary → form → preview → send).
+   Desktop: form on the left, preview + send stick on the right
+   so the message is always in view while you type. */
+
+.checkout {
+  display: grid;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .checkout {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: var(--space-16);
+  }
+
+  .checkout__aside {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-6));
+  }
+}
+
+.checkout__main {
+  display: grid;
+  gap: var(--space-12);
+}
+
+/* ---------- Order summary panel ---------- */
+
+.panel__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.panel__title {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-4);
+}
+
+.panel__head .panel__title {
+  margin: 0;
+}
+
+.link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--berry);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.summary {
+  list-style: none;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+}
+
+.summary__line {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.summary__qty {
+  font-weight: 700;
+  color: var(--cocoa);
+}
+
+.summary__details {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.summary__price {
+  font-weight: 600;
+  color: var(--cocoa);
+  white-space: nowrap;
+}
+
+/* ---------- The form ---------- */
+
+.form {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.form__section {
+  font-size: var(--text-xl);
+  margin: var(--space-4) 0 0;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
+}
+
+.form__section:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* Two fields side by side when there's room */
+.field-row {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 560px) {
+  .field-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field__optional {
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: var(--space-1);
+}
+
+textarea.field__control {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.field__control--date {
+  max-width: 16rem;
+}
+
+/* Errors: shown under the field, red-ish berry, with the field outlined */
+.field__error {
+  margin: var(--space-1) 0 0;
+  color: #B42318;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.field__control[aria-invalid='true'] {
+  border-color: #B42318;
+}
+
+.choice input[aria-invalid='true'] + .choice__card {
+  border-color: #B42318;
+}
+
+/* Soft warning (short notice): informative, not an error */
+.notice {
+  margin: var(--space-2) 0 0;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--berry);
+  border-radius: 0 8px 8px 0;
+  background: color-mix(in srgb, var(--blush) 60%, var(--cream));
+  color: var(--cocoa);
+  font-size: var(--text-sm);
+  max-width: 36rem;
+}
+
+/* The notice sits OUTSIDE .field-row on the cake/class pages, so
+   pull it up closer to the date it describes. */
+.field-row + .notice {
+  margin-top: calc(var(--space-4) * -1);
+}
+
+/* ---------- Radio "cards" ----------
+   Same trick as the menu's size pills: real radio inputs, visually hidden,
+   styling the span next to them with  input:checked + .choice__card  */
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.choices > legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+}
+
+@media (min-width: 700px) {
+  .choices--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.choices--list {
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+/* the error <p> should span the full width under the cards */
+.choices .field__error {
+  grid-column: 1 / -1;
+}
+
+.choice {
+  display: flex;
+}
+
+.choice input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.choice__card {
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: 0.15rem;
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.choice__card--row {
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.choice__title {
+  font-weight: 600;
+  color: var(--cocoa);
+}
+
+.choice__hint {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.choice__price {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--cocoa);
+  white-space: nowrap;
+}
+
+.choice:hover .choice__card {
+  border-color: var(--berry);
+}
+
+.choice input:checked + .choice__card {
+  border-color: var(--berry);
+  background: var(--blush);
+  box-shadow: inset 0 0 0 1px var(--berry); /* thicker border without a layout jump */
+}
+
+.choice input:focus-visible + .choice__card {
+  outline: 3px solid var(--berry);
+  outline-offset: 2px;
+}
+
+/* ---------- Checkbox row ---------- */
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.check input {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2rem;
+  accent-color: var(--berry); /* recolours the native checkbox */
+}
+
+/* ---------- Live preview + send ---------- */
+
+/* <pre> keeps the line breaks exactly as WhatsApp will show them */
+.message-preview {
+  margin: 0 0 var(--space-6);
+  padding: var(--space-6);
+  border-radius: 4px var(--radius) var(--radius) var(--radius); /* chat bubble corner */
+  background: #E7F6E9;
+  color: #1F2D22;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  min-height: 8rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.aside__hint {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.sent {
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--blush) 60%, var(--cream));
+}
+
+.sent p {
+  margin-bottom: var(--space-3);
+}
+
+.sent p:last-child {
+  margin-bottom: 0;
+}
+
+.empty-state {
+  padding-bottom: var(--space-12);
+}
+
+/* Cake sizes: 5 options. 2 per row on phones, 3 on tablets, all 5 on desktop */
+@media (min-width: 560px) {
+  .choices--5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .choices--5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.choices__hint {
+  grid-column: 1 / -1;
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.choice__per {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* Flavour dropdowns: one, or one per tier side by side when there's room */
+.flavour-fields {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.flavour-fields select.field__control {
+  max-width: 24rem;
+}
+
+@media (min-width: 560px) {
+  .flavour-fields--tiers {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: var(--space-4);
+  }
+
+  .flavour-fields--tiers select.field__control {
+    max-width: none;
+  }
+}
+
+/* GOTCHA: grid items default to min-width: auto, so a <select> refuses to
+   shrink below its longest option ("Not sure, please recommend one") and
+   the row overflows. min-width: 0 lets the columns share the space. */
+.flavour-fields .field {
+  min-width: 0;
+}
+
+.flavour-fields select.field__control {
+  width: 100%;
+  text-overflow: ellipsis;
+}

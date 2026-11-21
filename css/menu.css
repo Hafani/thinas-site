@@ -1,0 +1,259 @@
+/* =========================================================================
+   menu.css — styles only the Menu page uses.
+   ========================================================================= */
+
+/* ---------- Category jump links ----------
+   Sticky just under the header, so they're always reachable.
+   On phones they scroll sideways instead of wrapping. */
+
+.chips {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 10;
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding-block: var(--space-3);
+  margin-bottom: var(--space-4);
+  background: var(--cream);
+  scrollbar-width: none;
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: #fff;
+  color: var(--cocoa);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.chip:hover {
+  border-color: var(--berry);
+  color: var(--berry);
+}
+
+/* ---------- Sections ---------- */
+
+.menu-section {
+  padding-block: var(--space-12);
+  /* When we jump to #biscuits, leave room for the sticky header + chips */
+  scroll-margin-top: calc(var(--header-height) + 4rem);
+}
+
+.menu-section + .menu-section {
+  border-top: 1px solid var(--line);
+}
+
+.menu-section__head {
+  margin-bottom: var(--space-8);
+}
+
+.menu-section__head h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.menu-section__head p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.menu-status {
+  padding-block: var(--space-12);
+}
+
+/* ---------- Product grid ----------
+   auto-fill + minmax: "fit as many 15rem-wide columns as possible,
+   stretch them to fill the row". Responsive with zero media queries. */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--space-12) var(--space-6);
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+}
+
+.product__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-bottom: var(--space-4);
+  background: var(--blush);
+}
+
+.product__img--placeholder {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-2);
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.product__img--placeholder img {
+  opacity: 0.8;
+}
+
+/* The body grows so every card's "Add" row lines up at the bottom */
+.product__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.product__name {
+  font-size: var(--text-lg);
+  margin: 0;
+}
+
+.product__desc {
+  font-size: var(--text-sm);
+  color: var(--muted);
+  margin: 0;
+}
+
+.product__buy {
+  margin-top: auto; /* push to the bottom of the card */
+  padding-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.product__price {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--cocoa);
+}
+
+.product--quote .product__price {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--muted);
+}
+
+.btn.is-added {
+  background: var(--cocoa);
+  border-color: var(--cocoa);
+}
+
+/* ---------- Size picker ----------
+   LESSON: style radio buttons without losing them.
+   The real <input> is visually hidden but still there, so keyboard
+   arrows, screen readers and forms all keep working. We style the
+   <span> next to it, using the  input:checked + span  selector. */
+
+.sizes {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.sizes__legend {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--cocoa);
+}
+
+.sizes__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.size input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.size__pill {
+  display: inline-flex;
+  gap: 0.3rem;
+  min-height: 40px;
+  padding: 0.35rem 0.8rem;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: #fff;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--chocolate);
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+  align-items: center;
+}
+
+.size__icon {
+  color: var(--muted);
+}
+
+.size:hover .size__pill {
+  border-color: var(--berry);
+}
+
+.size input:checked + .size__pill {
+  border-color: var(--berry);
+  background: var(--blush);
+  color: var(--cocoa);
+}
+
+.size input:checked + .size__pill .size__icon {
+  color: var(--berry);
+}
+
+/* The hidden input gets focus, so show the ring on its visible partner */
+.size input:focus-visible + .size__pill {
+  outline: 3px solid var(--berry);
+  outline-offset: 2px;
+}
+
+/* ---------- Phones: compact rows instead of tall cards ----------
+   Photo on the left, details on the right. 14 full-height cards made
+   the page ~11 000px tall on a phone; this roughly thirds it. */
+@media (max-width: 560px) {
+  .products {
+    gap: var(--space-8);
+  }
+
+  .product {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  .product__img {
+    margin: 0;
+    aspect-ratio: 1;
+  }
+
+  .product__img--placeholder img {
+    width: 44px;
+  }
+
+  .product__img--placeholder span {
+    display: none;
+  }
+
+  .product__price {
+    font-size: var(--text-lg);
+  }
+
+  .size__pill {
+    padding-inline: 0.65rem;
+  }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thina's Tasty Treats | Home bakery in Pretoria</title>
+  <!-- The description is what Google shows under the link in search results -->
+  <meta name="description" content="Celebration cakes, cupcakes, scones and biscuits by the tub, baked at home in Pretoria. Order on WhatsApp at least 48 hours ahead. Baking classes available.">
+  <link rel="icon" href="images/emblem.png">
+
+  <!-- Fonts: "preconnect" opens the connection to Google early so text appears faster -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+
+  <!-- Order matters: tokens first (variables), then base, then components, then this page -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/home.css">
+
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+
+  <!-- layout.js fills this in -->
+  <div id="site-header"></div>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero__text">
+        <h1 id="hero-title" class="hero__title">
+          <span class="hero__line">Baked at home</span>
+          <span class="hero__line">in Pretoria,</span>
+          <span class="hero__line">by the tub or</span>
+          <span class="hero__line">by the tier.</span>
+        </h1>
+        <p class="hero__lead">
+          Biscuits and scones in 5, 10 and 20 litre tubs, celebration cakes made to
+          your design, and hands-on baking classes. Order at least
+          <span data-site="noticeHours">48</span> hours before you need it.
+        </p>
+        <div class="hero__actions">
+          <a href="menu.html" class="btn">See the menu</a>
+          <a href="custom-cake.html" class="btn btn--ghost">Request a custom cake</a>
+        </div>
+      </div>
+
+      <figure class="hero__media">
+        <img src="images/cake2.jpg" alt="Two-tier birthday cake in peach and yellow buttercream, topped with fresh flowers and a gold 'HBD' topper"
+             width="1024" height="1280" fetchpriority="high">
+        <figcaption class="hero__badge">Baking since 2019</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ WHAT SHE BAKES ============ -->
+    <section class="section container" aria-labelledby="bakes-title">
+      <div class="section__head">
+        <h2 id="bakes-title">What Thina bakes</h2>
+        <a href="menu.html" class="section__link">Full menu and prices</a>
+      </div>
+
+      <ul class="categories" role="list">
+        <li class="category">
+          <a href="menu.html#cakes" class="category__link">
+            <img src="images/cake3.jpg" alt="" loading="lazy" width="1079" height="1280">
+            <h3 class="category__name">Celebration cakes</h3>
+            <p class="category__price">Priced by design</p>
+          </a>
+        </li>
+        <li class="category">
+          <a href="menu.html#cupcakes" class="category__link">
+            <img src="images/decorated_cupcakes.jpg" alt="" loading="lazy" width="560" height="832">
+            <h3 class="category__name">Cupcakes</h3>
+            <p class="category__price">From R420 a dozen</p>
+          </a>
+        </li>
+        <li class="category">
+          <a href="menu.html#biscuits" class="category__link">
+            <img src="images/mixed_biscuits.jpg" alt="" loading="lazy" width="720" height="1280">
+            <h3 class="category__name">Biscuits by the tub</h3>
+            <p class="category__price">From R380 for 5 litres</p>
+          </a>
+        </li>
+        <li class="category">
+          <a href="menu.html#scones" class="category__link">
+            <img src="images/flavored_scones.jpg" alt="" loading="lazy" width="1087" height="1280">
+            <h3 class="category__name">Scones</h3>
+            <p class="category__price">From R350 for 5 litres</p>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ HOW ORDERING WORKS ============
+         This IS a real sequence, so numbering the steps makes sense. -->
+    <section class="steps-band" aria-labelledby="steps-title">
+      <div class="container">
+        <h2 id="steps-title">How ordering works</h2>
+        <ol class="steps" role="list">
+          <li class="step">
+            <h3 class="step__title">Choose your treats</h3>
+            <p>Pick from the menu, or describe the cake you have in mind.</p>
+          </li>
+          <li class="step">
+            <h3 class="step__title">Send it on WhatsApp</h3>
+            <p>At least <span data-site="noticeHours">48</span> hours before you need it. Bigger cakes need more notice.</p>
+          </li>
+          <li class="step">
+            <h3 class="step__title">Thina confirms</h3>
+            <p>She replies with your total. Pay half as a deposit to secure your order, and the rest later.</p>
+          </li>
+        </ol>
+        <a class="btn" href="menu.html">Start your order</a>
+      </div>
+    </section>
+
+    <!-- ============ CLASSES ============ -->
+    <section class="section container classes" aria-labelledby="classes-title">
+      <img class="classes__photo" src="images/work.jpg" loading="lazy" width="1032" height="774"
+           alt="Students in hairnets and aprons decorating cakes during one of Thina's baking classes">
+
+      <div class="classes__text">
+        <h2 id="classes-title">Learn to bake with Thina</h2>
+        <p>Small, hands-on classes in her kitchen. You bake alongside her and take home what you make.</p>
+
+        <!-- A price list styled like a menu board (dotted leaders between name and price) -->
+        <ul class="pricelist" role="list">
+          <li><span>Fluffy scones</span><span>R1 300</span></li>
+          <li><span>Jam tarts</span><span>R1 500</span></li>
+          <li><span>Cupcakes and decorating</span><span>R1 600</span></li>
+          <li><span>Buttercream cakes and decorating</span><span>R2 600</span></li>
+          <li><span>Mixed biscuits (three kinds)</span><span>R3 200</span></li>
+          <li><span>Fondant cakes</span><span>R3 200</span></li>
+        </ul>
+        <p class="pricelist__note">Prices are per person.</p>
+        <a href="classes.html" class="btn btn--ghost">Book a class</a>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+</body>
+</html>
