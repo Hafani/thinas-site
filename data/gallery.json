@@ -1,0 +1,53 @@
+{
+  "photos": [
+    {
+      "file": "oreo-chocolate-drip-40th.jpg",
+      "caption": "Chocolate drip cake for a 40th, topped with Oreos",
+      "alt": "Chocolate cake with a chocolate drip, Oreo biscuits, chocolate buttercream swirls and a gold 40 topper",
+      "width": 1022,
+      "height": 1197
+    },
+    {
+      "file": "two-tier-21st.jpg",
+      "caption": "Two-tier 21st birthday cake",
+      "alt": "Two-tier cake with a white top tier and a golden crumb-coated bottom tier, a gold 21 topper and rose-gold balloons behind it",
+      "width": 1206,
+      "height": 795
+    },
+    {
+      "file": "drip-cake-36th.jpg",
+      "caption": "Buttercream flower cake for a 36th",
+      "alt": "White cake with a white chocolate drip, pink and lilac buttercream flowers and a black 36 topper",
+      "width": 903,
+      "height": 1194
+    },
+    {
+      "file": "two-tier-football-cake.jpg",
+      "caption": "Two-tier football club cake",
+      "alt": "Two-tier navy and white fondant cake with a football club crest, an edible photo print and football toppers",
+      "width": 1129,
+      "height": 1400
+    },
+    {
+      "file": "one-love-cake.jpg",
+      "caption": "One Love themed birthday cake",
+      "alt": "Red, gold and green birthday cake with an edible One Love photo print and 'Happy birthday my love' letters",
+      "width": 898,
+      "height": 1190
+    },
+    {
+      "file": "teddy-bear-birthday-cake.jpg",
+      "caption": "Teddy bear birthday cake",
+      "alt": "Pink fondant birthday cake with a teddy bear topper, cartoon characters around the side and 'Happy birthday' letters",
+      "width": 791,
+      "height": 1053
+    },
+    {
+      "file": "cupcakes-pink-blue.jpg",
+      "caption": "A dozen pink and blue cupcakes",
+      "alt": "Box of twelve cupcakes with pink and blue buttercream roses",
+      "width": 895,
+      "height": 1200
+    }
+  ]
+}

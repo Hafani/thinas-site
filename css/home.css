@@ -300,3 +300,14 @@
   font-size: var(--text-sm);
   color: var(--muted);
 }
+
+/* Class names in the price list link to that class on the booking page */
+.pricelist a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pricelist a:hover {
+  color: var(--berry);
+  text-decoration: underline;
+}

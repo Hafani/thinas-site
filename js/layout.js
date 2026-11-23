@@ -20,6 +20,7 @@ const NAV_LINKS = [
   { label: 'Menu', href: 'menu.html' },
   { label: 'Custom cakes', href: 'custom-cake.html' },
   { label: 'Classes', href: 'classes.html' },
+  { label: 'Gallery', href: 'gallery.html' },
   { label: 'About', href: 'about.html' },
 ];
 
@@ -134,7 +135,8 @@ function setupMobileNav() {
   });
 
   // Close if the screen gets wide enough for the desktop menu.
-  window.matchMedia('(min-width: 860px)').addEventListener('change', () => setOpen(false));
+  // Must match the NAV BREAKPOINT in css/components.css
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', () => setOpen(false));
 }
 
 /* The one function other files call. */

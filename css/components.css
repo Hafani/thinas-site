@@ -78,7 +78,10 @@
   margin-right: auto;
 }
 
-@media (min-width: 860px) {
+/* NAV BREAKPOINT: 1024px. The same number is in js/layout.js (matchMedia),
+   so if you change it here, change it there too. Raised from 860px in
+   Phase 5: with the Gallery link added, the menu no longer fit below ~1000px. */
+@media (min-width: 1024px) {
   .site-header__inner {
     gap: var(--space-6);
   }
@@ -190,8 +193,8 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ---- Wide screens: normal horizontal menu ---- */
-@media (min-width: 860px) {
+/* ---- Wide screens: normal horizontal menu (see NAV BREAKPOINT above) ---- */
+@media (min-width: 1024px) {
   .nav-toggle {
     display: none;
   }
@@ -623,4 +626,10 @@ select.field__control {
 /* A lone dropdown doesn't need the full width of the form */
 .form > .field > select.field__control {
   max-width: 24rem;
+}
+
+/* Nav labels and the button never wrap onto two lines */
+.nav__link,
+.nav__cta {
+  white-space: nowrap;
 }

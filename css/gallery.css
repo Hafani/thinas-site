@@ -1,0 +1,197 @@
+/* =========================================================================
+   gallery.css — the photo grid and the lightbox.
+   The lightbox styles are also needed on the homepage (the "Recent cakes"
+   strip), so index.html loads this file too.
+   ========================================================================= */
+
+/* ---------- Grid ----------
+   Every tile is the same 4:5 shape (object-fit: cover crops to fill),
+   so the grid stays tidy whatever shape the photos are.
+   The full, uncropped photo shows in the lightbox. */
+
+.gallery {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8) var(--space-4);
+}
+
+@media (min-width: 760px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-12) var(--space-6);
+  }
+}
+
+.gallery__btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--blush);
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.gallery__btn img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery__btn:hover img {
+  transform: scale(1.03);
+}
+
+.gallery__caption {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* ---------- Call to action under the grid ---------- */
+
+.gallery-cta {
+  margin-top: var(--space-16);
+  padding: var(--space-12) var(--space-8);
+  border-radius: var(--radius);
+  background: var(--blush);
+}
+
+.gallery-cta h2 {
+  font-size: var(--text-2xl);
+}
+
+/* ---------- Lightbox (<dialog>) ---------- */
+
+.lightbox {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /* Solid, not see-through: the viewer fills the screen, and page text
+     showing through made the caption hard to read. */
+  background: #1E1411; /* very dark cocoa */
+  color: var(--cream);
+}
+
+.lightbox::backdrop {
+  background: #1E1411;
+}
+
+.lightbox[open] {
+  display: grid;
+  place-items: center;
+  animation: lb-in 0.2s ease;
+}
+
+@keyframes lb-in {
+  from { opacity: 0; }
+}
+
+.lightbox__figure {
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  padding: var(--space-16) var(--space-4) var(--space-6);
+}
+
+.lightbox__img {
+  /* Fit inside the screen, leaving room for the caption */
+  max-width: min(100%, 60rem);
+  max-height: calc(100dvh - 9rem);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  touch-action: pan-y; /* let our swipe code handle sideways movement */
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.lightbox__caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1) var(--space-4);
+  text-align: center;
+  font-size: var(--text-sm);
+}
+
+.lightbox__count {
+  color: color-mix(in srgb, var(--cream) 65%, transparent);
+}
+
+.lightbox__btn {
+  position: fixed;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 248 240 / 0.14);
+  color: var(--cream);
+  cursor: pointer;
+}
+
+.lightbox__btn:hover {
+  background: rgb(255 248 240 / 0.28);
+}
+
+.lightbox__btn:focus-visible {
+  outline-color: var(--cream);
+}
+
+.lightbox__close { top: var(--space-4); right: var(--space-4); }
+.lightbox__prev  { left: var(--space-4);  top: 50%; transform: translateY(-50%); }
+.lightbox__next  { right: var(--space-4); top: 50%; transform: translateY(-50%); }
+
+/* On phones the arrows sit at the bottom, out of the way of the photo
+   (most people swipe anyway). */
+@media (max-width: 600px) {
+  .lightbox__prev,
+  .lightbox__next {
+    top: auto;
+    bottom: var(--space-4);
+    transform: none;
+  }
+
+  .lightbox__figure {
+    padding-bottom: 5rem;
+  }
+
+  .lightbox__img {
+    max-height: calc(100dvh - 12rem);
+  }
+}
+
+/* ---------- Homepage strip ("Recent cakes") ---------- */
+
+.strip {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 760px) {
+  .strip {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.strip .gallery__btn img {
+  aspect-ratio: 1;
+}

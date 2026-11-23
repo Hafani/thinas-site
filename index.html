@@ -7,6 +7,39 @@
   <!-- The description is what Google shows under the link in search results -->
   <meta name="description" content="Celebration cakes, cupcakes, scones and biscuits by the tub, baked at home in Pretoria. Order on WhatsApp at least 48 hours ahead. Baking classes available.">
   <link rel="icon" href="images/emblem.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <!-- Link previews (WhatsApp, Facebook, Instagram DMs): see LEARN-phase-5.md.
+       These must be FULL addresses, so update them if the domain changes. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Thina's Tasty Treats">
+  <meta property="og:title" content="Thina's Tasty Treats | Home bakery in Pretoria">
+  <meta property="og:description" content="Celebration cakes, cupcakes, scones and biscuits by the tub, baked at home in Pretoria. Order on WhatsApp.">
+  <meta property="og:url" content="https://hafani.github.io/thinas-site/">
+  <meta property="og:image" content="https://hafani.github.io/thinas-site/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured data: tells Google this is a bakery, where it serves and how to
+       reach it. No street address on purpose: it's a home business.
+       Update "url" and "image" if the domain changes. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "Thina's Tasty Treats",
+    "url": "https://hafani.github.io/thinas-site/",
+    "image": "https://hafani.github.io/thinas-site/images/og-image.jpg",
+    "telephone": "+27682237647",
+    "areaServed": "Pretoria",
+    "foundingDate": "2019",
+    "sameAs": [
+      "https://www.instagram.com/thinasstastytreats",
+      "https://www.tiktok.com/@thinasstastytreats"
+    ]
+  }
+  </script>
 
   <!-- Fonts: "preconnect" opens the connection to Google early so text appears faster -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,8 +51,10 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/gallery.css">
 
   <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/home-page.js"></script>
 </head>
 <body>
 
@@ -74,21 +109,21 @@
           <a href="menu.html#cupcakes" class="category__link">
             <img src="images/decorated_cupcakes.jpg" alt="" loading="lazy" width="560" height="832">
             <h3 class="category__name">Cupcakes</h3>
-            <p class="category__price">From R420 a dozen</p>
+            <p class="category__price" data-from-price="cupcakes">From R420 a dozen</p>
           </a>
         </li>
         <li class="category">
           <a href="menu.html#biscuits" class="category__link">
             <img src="images/mixed_biscuits.jpg" alt="" loading="lazy" width="720" height="1280">
             <h3 class="category__name">Biscuits by the tub</h3>
-            <p class="category__price">From R380 for 5 litres</p>
+            <p class="category__price" data-from-price="biscuits">From R380 for 5 litres</p>
           </a>
         </li>
         <li class="category">
           <a href="menu.html#scones" class="category__link">
             <img src="images/flavored_scones.jpg" alt="" loading="lazy" width="1087" height="1280">
             <h3 class="category__name">Scones</h3>
-            <p class="category__price">From R350 for 5 litres</p>
+            <p class="category__price" data-from-price="scones">From R350 for 5 litres</p>
           </a>
         </li>
       </ul>
@@ -117,6 +152,16 @@
       </div>
     </section>
 
+    <!-- ============ RECENT CAKES ============
+         home-page.js fills the list with the first 4 photos in data/gallery.json -->
+    <section class="section container" aria-labelledby="recent-title">
+      <div class="section__head">
+        <h2 id="recent-title">Recent cakes</h2>
+        <a href="gallery.html" class="section__link">See the gallery</a>
+      </div>
+      <ul class="strip" role="list" id="recent-strip"></ul>
+    </section>
+
     <!-- ============ CLASSES ============ -->
     <section class="section container classes" aria-labelledby="classes-title">
       <img class="classes__photo" src="images/work.jpg" loading="lazy" width="1032" height="774"
@@ -124,10 +169,12 @@
 
       <div class="classes__text">
         <h2 id="classes-title">Learn to bake with Thina</h2>
-        <p>Small, hands-on classes in her kitchen. You bake alongside her and take home what you make.</p>
+        <p>Small, hands-on classes at Thina's home. You bake alongside her and take home what you make.</p>
 
         <!-- A price list styled like a menu board (dotted leaders between name and price) -->
-        <ul class="pricelist" role="list">
+        <!-- home-page.js rebuilds this list from "classes" in data/menu.json;
+             the rows below are only shown if that fails -->
+        <ul class="pricelist" role="list" id="class-pricelist">
           <li><span>Fluffy scones</span><span>R1 300</span></li>
           <li><span>Jam tarts</span><span>R1 500</span></li>
           <li><span>Cupcakes and decorating</span><span>R1 600</span></li>

@@ -102,7 +102,10 @@ function productHTML(product) {
     </article>`;
 }
 
-function menuHTML({ categories, products }) {
+function menuHTML({ categories: allCategories, products }) {
+  // Skip a category whose products are all hidden, so no empty section shows
+  const categories = allCategories.filter((c) => products.some((p) => p.category === c.id));
+
   // Jump links to each category
   const jump = categories.map((c) => `<a href="#${c.id}" class="chip">${c.name}</a>`).join('');
 

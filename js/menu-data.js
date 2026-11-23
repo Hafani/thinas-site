@@ -21,5 +21,14 @@ export async function loadMenu() {
     throw new Error(`Menu request failed: ${response.status}`);
   }
 
-  return response.json(); // parse the text into a JS object: { categories, products }
+  const menu = await response.json(); // parse the text into a JS object
+
+  /* "hidden": true on a product or class keeps it off the whole site
+     (menu, homepage prices, class booking) without deleting it.
+     Filtering HERE means no page can forget to do it. */
+  return {
+    ...menu,
+    products: menu.products.filter((p) => !p.hidden),
+    classes: (menu.classes ?? []).filter((c) => !c.hidden),
+  };
 }
