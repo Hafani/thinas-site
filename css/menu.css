@@ -89,17 +89,14 @@
   background: var(--blush);
 }
 
-.product__img--placeholder {
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: var(--space-2);
-  color: var(--muted);
-  font-size: var(--text-sm);
+/* A product without a photo: just the text. On desktop it lines up with its
+   neighbours because every card's "Add" row is pushed to the bottom. */
+.product--no-photo {
+  justify-content: flex-end;
 }
 
-.product__img--placeholder img {
-  opacity: 0.8;
+.product--no-photo .product__body {
+  flex: 0 0 auto;
 }
 
 /* The body grows so every card's "Add" row lines up at the bottom */
@@ -241,12 +238,9 @@
     aspect-ratio: 1;
   }
 
-  .product__img--placeholder img {
-    width: 44px;
-  }
-
-  .product__img--placeholder span {
-    display: none;
+  /* No photo: the text takes the full width, not the photo column */
+  .product--no-photo {
+    grid-template-columns: 1fr;
   }
 
   .product__price {

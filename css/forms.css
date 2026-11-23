@@ -30,11 +30,6 @@
   border-radius: var(--radius);
 }
 
-/* Second photo sits lower: a little rhythm, not a rigid grid */
-.intro-photos img:nth-child(2) {
-  margin-top: var(--space-8);
-}
-
 .intro-photos--single {
   grid-template-columns: 1fr;
 }

@@ -30,6 +30,8 @@ It disappears from the menu, the homepage prices, the class booking form or the 
 
 **Change a price.** Only `data/menu.json`. The homepage updates itself now.
 
+**A product without a photo** (`"image": null`) shows as text only, with no placeholder box, and is listed last in its category so the menu opens with photos. When you get a photo, put it in `images/` and set `"image": "images/your-photo.jpg"`. The product moves back into its place by itself.
+
 ---
 
 ## 3. Progressive enhancement (home-page.js)

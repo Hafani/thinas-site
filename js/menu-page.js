@@ -29,14 +29,8 @@ function bucketIcon(label) {
 }
 
 function imageHTML(product) {
-  if (!product.image) {
-    // No photo yet: a calm placeholder using the logo, not a broken image.
-    return `
-      <div class="product__img product__img--placeholder">
-        <img src="images/emblem.png" alt="" width="72" height="75">
-        <span>Photo coming soon</span>
-      </div>`;
-  }
+  // No photo yet → show nothing; the card is just text until a photo is added.
+  if (!product.image) return '';
   return `<img class="product__img" src="${product.image}" alt="${product.name}" loading="lazy">`;
 }
 
@@ -71,7 +65,7 @@ function productHTML(product) {
   // Cakes have no fixed price — send people to the custom cake form instead.
   if (product.quote) {
     return `
-      <article class="product product--quote">
+      <article class="product product--quote${product.image ? '' : ' product--no-photo'}">
         ${imageHTML(product)}
         <div class="product__body">
           <h3 class="product__name">${product.name}</h3>
@@ -87,7 +81,7 @@ function productHTML(product) {
   /* Each card is a <form>. Pressing Enter or the button "submits" it,
      and we read the chosen size/flavour with FormData. */
   return `
-    <article class="product">
+    <article class="product${product.image ? '' : ' product--no-photo'}">
       ${imageHTML(product)}
       <form class="product__body" data-product-id="${product.id}">
         <h3 class="product__name">${product.name}</h3>
@@ -114,6 +108,9 @@ function menuHTML({ categories: allCategories, products }) {
   const sections = categories.map((category) => {
     const cards = products
       .filter((p) => p.category === category.id)
+      // Products with a photo first; ones without a photo go to the end.
+      // .sort() keeps the original order among equals (it's "stable").
+      .sort((a, b) => Boolean(b.image) - Boolean(a.image))
       .map(productHTML)
       .join('');
     return `

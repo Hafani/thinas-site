@@ -117,6 +117,7 @@
     {
       "id": "melting-moments",
       "name": "Melting moments",
+      "hidden": true,
       "category": "biscuits",
       "image": null,
       "options": [
