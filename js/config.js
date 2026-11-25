@@ -24,8 +24,9 @@ export const SITE = {
   noticeHours: 48,
 
   social: {
+    // NOTE: the handles differ: Instagram ends in "treats", TikTok in "treat".
     instagram: 'https://www.instagram.com/thinasstastytreats',
-    tiktok: 'https://www.tiktok.com/@thinasstastytreats',
+    tiktok: 'https://www.tiktok.com/@thinasstastytreat',
   },
 };
 
